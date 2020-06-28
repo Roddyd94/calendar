@@ -1,9 +1,8 @@
 var express = require('express');
+var handlebars = require('express-handlebars').create({ defaultLayout:'main' });
 
+var calendar = require('./public/js/calendar.js');
 var app = express();
-
-var handlebars = require('express-handlebars')
-    .create({ defaultLayout:'main' });
 
 app.engine('handlebars', handlebars.engine);
 
@@ -16,8 +15,8 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.get('/about', (req, res) => {
-    res.render('about');
+app.get('/calendar', (req, res) => {
+    res.render('calendar');
 });
 
 app.use((req, res, next) => {
