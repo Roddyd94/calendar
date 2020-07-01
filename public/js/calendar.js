@@ -1,6 +1,3 @@
-
-var request = require(request);
-
 var specDayTypes = ['getRestDeInfo', 'getHoliDeInfo', 'getAnniversaryInfo', 'get24DivisionsInfo', 'getSundryDayInfo'];
 
 var calendar = {
