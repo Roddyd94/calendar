@@ -1,0 +1,37 @@
+export var dates = (calendar) => {
+    var weeks = [[],[],[],[],[],[]];
+    var firstDate = new Date(`${calendar.year}-${calendar.month}`);
+    var lastDate = new Date(`${calendar.year}-${calendar.month + 1}`);
+
+    lastDate = new Date(lastDate.getTime() - 1000 * 60 * 60 * 24);
+
+    var monthName = document.getElementById("month-name");
+    monthName.innerHTML = `${calendar.month}월`;
+    var monthSelector = document.getElementById("calendar-grid");
+
+    for (let i = 0; i < Math.floor((lastDate.getDate() + lastDate.getDay()) / 7) ; i++) {
+        let weekSelector = document.createElement("tr");
+        weekSelector.id = `week-${i + 1}`;
+        weekSelector.classList.add("week-contents");
+        
+        for (let j = 0; j < 7; j++){
+            weeks[i][j] = new Date(firstDate.getTime() + i * (1000 * 60 * 60 * 24 * 7)
+                + (j - firstDate.getDay()) * (1000 * 60 * 60 * 24));
+
+            let dateSelector = document.createElement("td");
+            dateSelector.id = `date-${i + 1}-${j + 1}`;
+
+            if (weeks[i][j].getDate() == calendar.today &&
+            weeks[i][j].getMonth() + 1 == calendar.month)
+                dateSelector.classList.add("today");
+
+            if (j == 0) dateSelector.classList.add("sunday");
+            else if (j == 6) dateSelector.classList.add("saturday");
+
+            dateSelector.classList.add("date-cell");
+            dateSelector.innerHTML = `${weeks[i][j].getDate()}일`;
+            weekSelector.appendChild(dateSelector);
+        }
+        monthSelector.appendChild(weekSelector);
+    }
+};

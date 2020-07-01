@@ -1,17 +1,24 @@
 var express = require('express');
-var handlebars = require('express-handlebars').create({ defaultLayout:'main' });
+var handlebars = require('express-handlebars')
+    .create({ defaultLayout:'main' });
 
 var app = express();
 
-app.engine('handlebars', handlebars.engine);
-
-app.set('view engine', 'handlebars');
-app.set('port', process.env.PORT || 12345);
-
 app.use(express.static(__dirname + '/public'));
+app.set('port', process.env.PORT || 12345);
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 
 app.get('/', (req, res) => {
     res.render('home');
+});
+
+app.use((req, res, next) => {
+    var year = req.query.year;
+    var month = req.query.month;
+    var date = req.query.date;
+    res.locals.date = new Date(`${year}-${month}-${date}`);
+    next();
 });
 
 app.get('/calendar', (req, res) => {

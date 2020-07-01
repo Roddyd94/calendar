@@ -11,7 +11,11 @@
         <td style="width: 100%; height: 100%;">
             <table class="vertical-box calendar">
                 <thead>
-                    <tr style="height: 8em;"></tr>
+                    <tr style="height: 8em; justify-content: space-between;">
+                        <td class="left-arrow"></td>
+                        <td id="month-name"></td>
+                        <td class="right-arrow"></td>
+                    </tr>
                 </thead>
                 <tbody id="calendar-grid">
                     <tr>
@@ -23,10 +27,10 @@
                         <th>금 FRI</th>
                         <th class="saturday">토 SAT</th>
                     </tr>
-                    <script src="js/calendar.js"></script>
                 </tbody>
             </table>
         </td>
     </tr>
 </table>
+<script type="module" src="js/calendar.js"></script>
 

@@ -69,7 +69,7 @@ th{
 
 td{
     width: 14.285%;
-    height: 10em;
+    height: 8vw;
     border: solid 1px;
 }
 
@@ -96,6 +96,12 @@ td{
     height: 100%;
 }
 
+.date-cell{
+    font-size: 25pt;
+    color: #f1f1f1aa;
+    border: solid 1px #e4e4e423;
+}
+
 .sunday{
     color: #ff0000aa;
     border: solid 1px #e4e4e423;
@@ -104,6 +110,31 @@ td{
 .saturday{
     color: #0000ffaa;
     border: solid 1px #e4e4e423;
+}
+
+.today{
+    border: solid 2px #91ff00bb;
+}
+
+.left-arrow{
+    border: solid 0px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.right-arrow{
+    border: solid 0px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#month-name{
+    font-size: 4vh;
+    font-weight: 500;
+    color: #f1f1f1aa;
+    border: solid 0px;
+    width: fit-content;
+    height: fit-content;
 }
 
 #clock-today{
