@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 
 html{
     height: 100%;
@@ -8,6 +10,7 @@ html{
     padding: 0 0 0 0;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    font-family: 'Share Tech Mono', 'Nanum Gothic Coding';
 }
 html::-webkit-scrollbar {
     display: none;
@@ -23,9 +26,16 @@ body{
 }
 
 table{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
     width: 100%;
     height: 100%;
     color: #e4e4e423;
+}
+
+thead{
+    width: 100%;
+    height: 100px;
 }
 
 tbody{
@@ -46,20 +56,26 @@ tr{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
 }
 
 th{
+    padding: 8px;
     width: 14.285%;
     height: 100%;
-    border: solid 1px;
-    color: #f1f1f1;
+    color: #f1f1f1aa;
+    border: solid 1px #e4e4e423;
+    font-size: 30pt;
 }
 
 td{
     width: 14.285%;
-    height: 5em;
+    height: 10em;
     border: solid 1px;
+}
+
+.icon{
+    width: 100px;
+    height: 100px;
 }
 
 .vertical-box{
@@ -80,16 +96,25 @@ td{
     height: 100%;
 }
 
+.sunday{
+    color: #ff0000aa;
+    border: solid 1px #e4e4e423;
+}
+
+.saturday{
+    color: #0000ffaa;
+    border: solid 1px #e4e4e423;
+}
+
 #clock-today{
     position: relative;
     width: fit-content;
     height: fit-content;
-    left: -0.25em;
-    top: 0.3em;
+    left: 0.35em;
+    top: 0.15em;
     letter-spacing: -0.12em;
     font-size: 10em;
     font-weight: 100;
-    font-family: 'Share Tech Mono', '맑은 고딕';
     margin: 0 0 0 0;
     padding: 0 0 0 0;
 }
@@ -98,12 +123,11 @@ td{
     position: relative;
     width: fit-content;
     height: fit-content;
-    left: 0.8em;
-    top: 0.7em;
+    left: -0.25em;
+    top: 0.3em;
     letter-spacing: -0.12em;
-    font-size: 5em;
+    font-size: 8em;
     font-weight: 100;
-    font-family: 'Share Tech Mono', '맑은 고딕';
     margin: 0 0 0 0;
     padding: 0 0 0 0;
 }

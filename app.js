@@ -1,7 +1,6 @@
 var express = require('express');
 var handlebars = require('express-handlebars').create({ defaultLayout:'main' });
 
-var calendar = require('./public/js/calendar.js');
 var app = express();
 
 app.engine('handlebars', handlebars.engine);

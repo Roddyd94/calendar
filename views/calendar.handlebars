@@ -1,78 +1,35 @@
+<script src="js/handlebars-v4.7.6.js"></script>
+<script id="grid-template" type="text/x-handlebars-template"></script>
+
 <table>
     <tr style="height: 100%;">
-        <td style="width: 15%; height: 100%;"></td>
-        <td style="width: 85%; height: 100%;">
+        <td style="width: 50em; height: 100%;">
+            <table class="vertical-box">
+                <thead>
+                    <img class="icon" src="img/logo.png" />
+                </thead>
+                <tbody></tbody>
+            </table>
+        </td>
+        <td style="width: 100%; height: 100%;">
             <table class="vertical-box calendar">
-                <thead class="vertical-box" style="height: 8em;">
-                    <tr style="height: 75%;"></tr>
-                    <tr style="height: 25%;">
-                        <th>일 SUN</th>
+                <thead>
+                    <tr style="height: 8em;"></tr>
+                </thead>
+                <tbody id="calendar-grid">
+                    <tr>
+                        <th class="sunday">일 SUN</th>
                         <th>월 MON</th>
                         <th>화 TUE</th>
                         <th>수 WED</th>
                         <th>목 THU</th>
                         <th>금 FRI</th>
-                        <th>토 SAT</th>
+                        <th class="saturday">토 SAT</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-        </table>
+                    <script src="js/calendar.js"></script>
+                </tbody>
+            </table>
         </td>
     </tr>
 </table>
-{{{calendar}}}
+
