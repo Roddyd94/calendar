@@ -1,7 +1,6 @@
 var express = require('express');
-var handlebars = require('express-handlebars');
-
-handlebars.create({ defaultLayout:'main', helpers: { queryData: "" } });
+var handlebars = require('express-handlebars')
+    .create({ defaultLayout:'main', helpers: { dateData: "" } });
 
 var app = express();
 
@@ -15,8 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/calendar', (req, res) => {
-    let dateData = req.query.date;
-    res.render('calendar', { helpers: { queryData: dateData } });
+    res.render('calendar', { helpers: { dateData: req.query.date } });
 });
 
 app.use((req, res, next) => {

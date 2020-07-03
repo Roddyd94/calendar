@@ -1,14 +1,15 @@
 import { dates } from '/js/dates.js';
-var dateData = "20200605";
+var dateData = document.querySelector("#date-data");
+var dateString = dateData.innerHTML;
 var today = new Date();
 var calendar = {};
 var clickPrev = document.querySelector(".left-arrow");
 var clickNext = document.querySelector(".right-arrow");
 
 if (dateData != ""){
-    calendar.year = Math.floor(Number(dateData) / 10000);
-    calendar.month = Math.floor((Number(dateData) % 10000) / 100);
-    calendar.today = Math.floor(Number(dateData) % 100);
+    calendar.year = Math.floor(Number(dateString) / 10000);
+    calendar.month = Math.floor((Number(dateString) % 10000) / 100);
+    calendar.today = Math.floor(Number(dateString) % 100);
 }
 else {
     calendar.year = today.getFullYear();
@@ -19,12 +20,12 @@ else {
 dates(calendar);
 
 clickPrev.onclick = () => {
-    location.href=`calendar?date=${calendar.year}
-${(calendar.month - 1 > 9)?(calendar.month - 1):('0' + (calendar.month - 1))}
-${(calendar.today > 9)?(calendar.today):('0'+calendar.today)}`
+    location.href=`calendar?date=${(calendar.month == 1)?(calendar.year - 1):(calendar.year)}
+${(calendar.month == 1)?("12"):((calendar.month - 1 > 9)?(calendar.month - 1):('0' + (calendar.month - 1)))}
+01`
 }
 clickNext.onclick = () => {
-    location.href=`calendar?date=${calendar.year}
-${(calendar.month + 1 > 9)?(calendar.month + 1):('0' + (calendar.month + 1))}
-${(calendar.today > 9)?(calendar.today):('0'+calendar.today)}`
+    location.href=`calendar?date=${(calendar.month == 12)?(calendar.year + 1):(calendar.year)}
+${(calendar.month == 12)?("01"):((calendar.month + 1 > 9)?(calendar.month + 1):('0' + (calendar.month + 1)))}
+01`
 }

@@ -1,15 +1,16 @@
 export var dates = (calendar) => {
     var weeks = [[],[],[],[],[],[]];
     var firstDate = new Date(`${calendar.year}-${calendar.month}`);
-    var lastDate = new Date(`${calendar.year}-${calendar.month + 1}`);
+    var lastDate = new Date(`${(calendar.month == 12)?(calendar.year + 1):(calendar.year)}-${(calendar.month == 12)?(1):(calendar.month + 1)}`);
 
+    console.log(lastDate);
     lastDate = new Date(lastDate.getTime() - 1000 * 60 * 60 * 24);
 
     var monthName = document.getElementById("month-name");
     monthName.innerHTML = `${calendar.year}년 ${calendar.month}월`;
     var monthSelector = document.getElementById("calendar-grid");
 
-    for (let i = 0; i < Math.floor((lastDate.getDate() + lastDate.getDay()) / 7) ; i++) {
+    for (let i = 0; i < Math.ceil((lastDate.getDate() + firstDate.getDay()) / 7) ; i++) {
         let weekSelector = document.createElement("tr");
         weekSelector.id = `week-${i + 1}`;
         weekSelector.classList.add("week-contents");
