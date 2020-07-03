@@ -6,7 +6,7 @@ export var dates = (calendar) => {
     lastDate = new Date(lastDate.getTime() - 1000 * 60 * 60 * 24);
 
     var monthName = document.getElementById("month-name");
-    monthName.innerHTML = `${calendar.month}월`;
+    monthName.innerHTML = `${calendar.year}년 ${calendar.month}월`;
     var monthSelector = document.getElementById("calendar-grid");
 
     for (let i = 0; i < Math.floor((lastDate.getDate() + lastDate.getDay()) / 7) ; i++) {
@@ -21,12 +21,17 @@ export var dates = (calendar) => {
             let dateSelector = document.createElement("td");
             dateSelector.id = `date-${i + 1}-${j + 1}`;
 
-            if (weeks[i][j].getDate() == calendar.today &&
-            weeks[i][j].getMonth() + 1 == calendar.month)
-                dateSelector.classList.add("today");
-
-            if (j == 0) dateSelector.classList.add("sunday");
-            else if (j == 6) dateSelector.classList.add("saturday");
+            if (weeks[i][j].getMonth() + 1 == calendar.month){
+                if(weeks[i][j].getDate() == calendar.today)
+                    dateSelector.classList.add("today");
+                if (j == 0) dateSelector.classList.add("sunday");
+                else if (j == 6) dateSelector.classList.add("saturday");
+            }
+            else{
+                dateSelector.classList.add("other-month")
+                if (j == 0) dateSelector.classList.add("other-sunday");
+                else if (j == 6) dateSelector.classList.add("other-saturday");
+            }
 
             dateSelector.classList.add("date-cell");
             dateSelector.innerHTML = `${weeks[i][j].getDate()}일`;

@@ -1,6 +1,7 @@
 var express = require('express');
-var handlebars = require('express-handlebars')
-    .create({ defaultLayout:'main' });
+var handlebars = require('express-handlebars');
+
+handlebars.create({ defaultLayout:'main', helpers: { queryData: "" } });
 
 var app = express();
 
@@ -13,16 +14,9 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.use((req, res, next) => {
-    var year = req.query.year;
-    var month = req.query.month;
-    var date = req.query.date;
-    res.locals.date = new Date(`${year}-${month}-${date}`);
-    next();
-});
-
 app.get('/calendar', (req, res) => {
-    res.render('calendar');
+    let dateData = req.query.date;
+    res.render('calendar', { helpers: { queryData: dateData } });
 });
 
 app.use((req, res, next) => {
