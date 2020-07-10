@@ -17,6 +17,10 @@ app.get('/calendar', (req, res) => {
     res.render('calendar', { helpers: { dateData: req.query.date } });
 });
 
+app.get('/task', (req, res) => {
+    res.render('task', { helpers: { dateData: req.query.date } });
+});
+
 app.use((req, res, next) => {
     res.status(404);
     res.render('404');
