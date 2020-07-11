@@ -1,35 +1,37 @@
-<p>제목 : <input type="text" name="main" value="">
-</p>
-<ol>
-    <li>시작시간 : <input type="time" name="start_time" value=""></li>
-    <li>끝시간 : <input type="time" name="endtime" value=""></li>
-    <li>장소 : <input type="text" name="starttime" value=""></li>
-    <li>알람 시작 : 
-        <select name="alrim">
-            <option value="3분 전">3분 전</option>
-            <option value="5분 전">5분 전</option>
-            <option value="10분 전">10분 전</option>
-            <option value="15분 전">15분 전</option>
-            <option value="20분 전">20분 전</option>
-        </select>
-    </li>
-    <li>반복
-        <p>
-            일<input type="checkbox" name="week" value="sun">
-            월<input type="checkbox" name="week" value="mon">
-            화<input type="checkbox" name="week" value="tue">
-            수<input type="checkbox" name="week" value="wed">
-            목<input type="checkbox" name="week" value="thu">
-            금<input type="checkbox" name="week" value="fri">
-            토<input type="checkbox" name="week" value="sat">
-        </p>
-    </li>
-    <li>메모
-        <p>
-            <textarea>
-
-            </textarea>
-        </p>
-    </li>
-</ol>
-<input type="button" value="저장">
+<div class="vertical-box">
+    <span class="task-item" id="task-title">
+        제&nbsp &nbsp목
+        <input type="text" class="task-content" id="task-name">
+        <input type="button" id="save-task" value="저 장">
+    </span>
+    <ol id="task-items">
+        <li class="task-item">시작 시간<input type="time" class="task-content" id="start-time"></li>
+        <li class="task-item">종료 시간<input type="time" class="task-content" id="end-time"></li>
+        <li class="task-item">장&nbsp &nbsp &nbsp소<input type="text" class="task-content" id="place"></li>
+        <li class="task-item">알람 시작 
+            <select class="task-content" id="alarm">
+                <option value="3">&nbsp3분 전</option>
+                <option value="5">&nbsp5분 전</option>
+                <option value="10">10분 전</option>
+                <option value="15">15분 전</option>
+                <option value="20">20분 전</option>
+            </select>
+        </li>
+        <li class="task-item">
+            반&nbsp &nbsp &nbsp복
+            <span style="font-size: 4vh;">
+                일<input type="checkbox" class="repeat-on-day" id="select-sun">
+                월<input type="checkbox" class="repeat-on-day" id="select-mon">
+                화<input type="checkbox" class="repeat-on-day" id="select-tue">
+                수<input type="checkbox" class="repeat-on-day" id="select-wed">
+                목<input type="checkbox" class="repeat-on-day" id="select-thu">
+                금<input type="checkbox" class="repeat-on-day" id="select-fri">
+                토<input type="checkbox" class="repeat-on-day" id="select-sat">
+            </span>
+        </li>
+        <li class="task-item">
+            메&nbsp &nbsp &nbsp모
+            <textarea class="task-content" id="task-description"></textarea>
+        </li>
+    </ol>
+</div>

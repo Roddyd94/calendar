@@ -6,7 +6,7 @@ var calendar = {};
 var clickPrev = document.querySelector(".left-arrow");
 var clickNext = document.querySelector(".right-arrow");
 
-if (dateData != ""){
+if (dateString != ""){
     calendar.year = Math.floor(Number(dateString) / 10000);
     calendar.month = Math.floor((Number(dateString) % 10000) / 100);
     calendar.today = Math.floor(Number(dateString) % 100);
