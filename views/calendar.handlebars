@@ -1,41 +1,33 @@
-<table>
-    <tr style="height: 100%;">
-        <td class="side-bar">
-            <table class="vertical-box">
-                <thead>
-                    <div id="date-data" style="display: none;">{{dateData}}</div>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </td>
-        <td style="width: 100%; height: 100%;">
-            <table class="vertical-box calendar">
-                <thead>
-                    <tr class="top-bar">
-                        <td class="left-arrow">
-                            <img class="icon" src="img/arrow.png"/>
-                        </td>
-                        <td id="month-name"></td>
-                        <td class="right-arrow">
-                            <img class="icon" src="img/arrow.png" style="transform: scaleX(-1);"/>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody id="calendar-grid">
-                    <tr>
-                        <th class="sunday">일 SUN</th>
-                        <th>월 MON</th>
-                        <th>화 TUE</th>
-                        <th>수 WED</th>
-                        <th>목 THU</th>
-                        <th>금 FRI</th>
-                        <th class="saturday">토 SAT</th>
-                    </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-</table>
+<div>
+    <nav class="nav">
+        <div id="date-data" style="display: none;">{{dateData}}</div>
+    </nav>
+    <header class="header">
+        <span class="left-arrow">
+            <img class="icon" src="img/arrow.png"/>
+        <span>
+        <span id="month-name"><span>
+        <span class="right-arrow">
+            <img class="icon" src="img/arrow.png"/>
+        <span>
+    </header>
+    <section class="section">
+        <table class="calendar">
+            <thead>
+                <tr>
+                    <th class="sunday">일 SUN</th>
+                    <th>월 MON</th>
+                    <th>화 TUE</th>
+                    <th>수 WED</th>
+                    <th>목 THU</th>
+                    <th>금 FRI</th>
+                    <th class="saturday">토 SAT</th>
+                </tr>
+            </thead>
+            <tbody id="calendar-grid">
+            </tbody>
+        </table>
+    </section>
+</div>
 <script type="module" src="js/calendar.js"></script>
 
