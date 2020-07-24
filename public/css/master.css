@@ -1,254 +1,264 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap");
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    font-family: 'Share Tech Mono', 'Nanum Gothic Coding';
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	font-family: "Share Tech Mono", "Nanum Gothic Coding";
 }
 html::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
-body{
-    background-color: #222222;
-    color: #f1f1f1aa;
-    word-break: keep-all;
+body {
+	background-color: #222222;
+	color: #f1f1f1aa;
+	word-break: keep-all;
 }
 
 .header {
-    width: 100%;
-    height: 15%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-bottom: 1px solid #e4e4e423;
+	width: 100%;
+	height: 15%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	border-bottom: 1px solid #e4e4e423;
+	box-sizing: border-box;
 }
+
 .nav {
-    width: 20%;
-    height: 85%;
-    float: left;
+	width: 20%;
+	height: 85%;
+	float: left;
+	border-right: 1px solid #e4e4e423;
+	box-sizing: border-box;
 }
 
 .section {
-    width: 80%;
-    height: 85%;
-    float: right;
+	width: 80%;
+	height: 85%;
+	float: left;
+	box-sizing: border-box;
 }
 
-table{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    color: #e4e4e423;
+table {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	color: #f1f1f1aa;
 }
 
-thead{
-    width: 100%;
-}
-
-tbody{
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+tbody {
+	overflow-y: scroll;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
 }
 tbody::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
-tr{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+tr {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
-th{
-    padding: 8px;
-    width: 14.285%;
-    height: 100%;
-    color: #f1f1f1aa;
-    border: solid 1px #e4e4e423;
-    font-size: 4vh;
+th {
+	width: 100%;
+	height: 7vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: solid 1px #e4e4e423;
+	font-size: 4vh;
+	box-sizing: border-box;
 }
 
-td{
-    width: 14.285%;
-    height: 8vw;
-    border: solid 1px;
+td {
+	width: 100%;
+	height: 8vw;
+	border: solid 1px;
+	box-sizing: border-box;
 }
 
-.icon{
-    width: 9vh;
-    height: 100%;
+.icon {
+	width: 9vh;
+	height: 100%;
 }
 
-.left-arrow{
-    border: solid 0px;
-    width: fit-content;
-    height: fit-content;
+.left-arrow {
+	border: solid 0px;
+	width: fit-content;
+	height: fit-content;
 }
 
-.right-arrow{
-    border: solid 0px;
-    width: fit-content;
-    height: fit-content;
-    transform: scaleX(-1);
+.right-arrow {
+	border: solid 0px;
+	width: fit-content;
+	height: fit-content;
+	transform: scaleX(-1);
 }
 
-.date-cell{
-    font-size: 3vh;
-    color: #f1f1f1aa;
-    border: solid 1px #e4e4e423;
+.date-cell {
+	font-size: 3vh;
+	color: #f1f1f1aa;
+	border: solid 1px #e4e4e423;
 }
 
-.sunday{
-    color: #ff0000aa;
-    border: solid 1px #e4e4e423;
+.saturday {
+	color: #0000ffaa;
+	border: solid 1px #e4e4e423;
 }
 
-.saturday{
-    color: #0000ffaa;
-    border: solid 1px #e4e4e423;
+.sunday {
+	color: #ff0000aa;
+	border: solid 1px #e4e4e423;
 }
 
-.today{
-    border: solid 1px #91ff00bb;
+.holyday {
+	font-size: 1vh;
 }
 
-.other-month{
-    color: #a0a0a088;
-    border: solid 1px #e4e4e423;
+.rest {
+	color: #ff0000aa;
+	border: solid 1px #e4e4e423;
 }
 
-.other-sunday{
-    color: #a0242488;
-    border: solid 1px #e4e4e423;
+.today {
+	border: solid 1px #91ff00bb;
 }
 
-.other-saturday{
-    color: #2424a088;
-    border: solid 1px #e4e4e423;
+.other-month {
+	color: #a0a0a088;
+	border: solid 1px #e4e4e423;
 }
 
-.task-item{
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    width: 100%;
-    height: 8vh;
-    font-size: 5vh;
-    font-family: 'Nanum Gothic Coding';
+.other-sunday {
+	color: #a0242488;
+	border: solid 1px #e4e4e423;
 }
 
-.task-content{
-    width: 36vh;
-    height: 6vh;
-    font-size: 4vh;
-    margin: 0px;
-    padding: 0px 2vh;
-    border: 0px;
-    font-family: 'Nanum Gothic Coding';
+.other-saturday {
+	color: #2424a088;
+	border: solid 1px #e4e4e423;
 }
 
-.repeat-on-day{
-    width: 3vh;
-    height: 3vh;
-    margin: 0px;
-    margin-left: 1vh;
-    padding: 0px;
-    border: 0px;
+.task-item {
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	width: 100%;
+	height: 8vh;
+	font-size: 5vh;
+	font-family: "Nanum Gothic Coding";
 }
 
-#month-name{
-    font-size: 8vh;
-    font-weight: 500;
-    color: #f1f1f1aa;
-    border: solid 0px;
-    width: fit-content;
-    height: fit-content;
+.task-content {
+	width: 36vh;
+	height: 6vh;
+	font-size: 4vh;
+	margin: 0px;
+	padding: 0px 2vh;
+	border: 0px;
+	font-family: "Nanum Gothic Coding";
 }
 
-#clock-today{
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-    left: 0.35em;
-    top: 0.18em;
-    letter-spacing: -0.12em;
-    font-size: 12vh;
-    font-weight: 100;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+.repeat-on-day {
+	width: 3vh;
+	height: 3vh;
+	margin: 0px;
+	margin-left: 1vh;
+	padding: 0px;
+	border: 0px;
 }
 
-#clock-task{
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-    left: -0.25em;
-    top: 0.3em;
-    letter-spacing: -0.12em;
-    font-size: 10vh;
-    font-weight: 100;
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+#month-name {
+	font-size: 8vh;
+	font-weight: 500;
+	color: #f1f1f1aa;
+	border: solid 0px;
+	width: fit-content;
+	height: fit-content;
 }
 
-#clock-countdown{
-    width: fit-content;
-    height: fit-content;
-    letter-spacing: -0.12em;
-    font-size: 36vh;
-    font-weight: 100;
-    font-family: 'Share Tech Mono', '맑은 고딕';
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
+#clock-today {
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+	left: 0.35em;
+	top: 0.18em;
+	letter-spacing: -0.12em;
+	font-size: 12vh;
+	font-weight: 100;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
-#task-title{
-    justify-content: space-around;
-    align-content: center;
+#clock-task {
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+	left: -0.25em;
+	top: 0.3em;
+	letter-spacing: -0.12em;
+	font-size: 10vh;
+	font-weight: 100;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
-#task-items{
-    width: 95%;
-    padding-right: 5vh;
+#clock-countdown {
+	width: fit-content;
+	height: fit-content;
+	letter-spacing: -0.12em;
+	font-size: 36vh;
+	font-weight: 100;
+	font-family: "Share Tech Mono", "맑은 고딕";
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
-#save-task{
-    width: 12vh;
-    height: 6.5vh;
-    font-family: 'Nanum Gothic Coding';
-    font-weight: 700;
-    font-size: 3.5vh;
-    background-color: #696969;
-    color: #eeeeee;
+#task-title {
+	justify-content: space-around;
+	align-content: center;
 }
 
-#task-description{
-    width: 48vh;
-    height: 24vh;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    resize: none;
+#task-items {
+	width: 95%;
+	padding-right: 5vh;
+}
+
+#save-task {
+	width: 12vh;
+	height: 6.5vh;
+	font-family: "Nanum Gothic Coding";
+	font-weight: 700;
+	font-size: 3.5vh;
+	background-color: #696969;
+	color: #eeeeee;
+}
+
+#task-description {
+	width: 48vh;
+	height: 24vh;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	resize: none;
 }
 #task-description::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
-#alarm{
-    width: 40vh;
-
+#alarm {
+	width: 40vh;
 }
