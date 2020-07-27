@@ -6,6 +6,7 @@ var handlebars = require("express-handlebars").create({
 });
 
 var holiday = require("./public/js/holiday");
+var lunaYear = require("./public/js/lunaYear");
 
 var app = express();
 
@@ -36,7 +37,7 @@ app.get("/holiday", (req, res) => {
 	var path = `./public/json/holi_${year}.json`;
 	var holiData;
 	if (fs.existsSync(path)) {
-		holiData = fs.readFile(path, "utf-8", (err, data) => {
+		fs.readFile(path, "utf-8", (err, data) => {
 			if (err || !data) {
 				throw err;
 			}
@@ -50,8 +51,43 @@ app.get("/holiday", (req, res) => {
 				if (err) {
 					throw err;
 				}
-				console.log(`${year}.json is saved.`);
+				console.log(`${path} is saved.`);
 				res.json(holiData);
+			});
+		})();
+	}
+});
+
+app.get("/lunaYear", (req, res) => {
+	var today = new Date();
+	var year = req.query.date
+		? req.query.date.substring(0, 4)
+		: `${today.getFullYear()}`;
+	var month = req.query.date
+		? req.query.date.substring(4, 6)
+		: `${today.getMonth() + 1}`;
+	var day = req.query.date
+		? req.query.date.substring(6, 8)
+		: `${today.getDate()}`;
+	var path = `./public/json/luna_${year}-${month}-${day}.json`;
+	var lunaData;
+	if (fs.existsSync(path)) {
+		fs.readFile(path, "utf-8", (err, data) => {
+			if (err || !data) {
+				throw err;
+			}
+			lunaData = JSON.parse(data.toString());
+			res.json(lunaData);
+		});
+	} else {
+		(async () => {
+			lunaData = await lunaYear.reqLunaYear(req.query.date);
+			fs.writeFile(path, JSON.stringify(lunaData), (err) => {
+				if (err) {
+					throw err;
+				}
+				console.log(`${path} is saved.`);
+				res.json(lunaData);
 			});
 		})();
 	}
