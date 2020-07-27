@@ -1,14 +1,13 @@
 var request = require("request");
 var exports = (module.exports = {});
-
 exports.reqHoliday = (date) => {
-	year = Math.floor(date / 10000);
-	month = Math.floor((date % 10000) / 100);
+	var year = Math.floor(date / 10000);
+	var month = 0; // Math.floor((date % 10000) / 100);
 
 	if (!date) {
 		let today = new Date();
 		year = today.getFullYear();
-		month = today.getMonth() + 1;
+		month = 0; // today.getMonth() + 1;
 	}
 
 	var specDayTypes = [

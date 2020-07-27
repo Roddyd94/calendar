@@ -1,3 +1,31 @@
+var inputHoliday = (calHoli, selector, date) => {
+	if (calHoli) {
+		if (calHoli.length > 0) {
+			calHoli.forEach((element) => {
+				let dateString = String(element.locdate);
+				let temp = dateString.substring(0, 4);
+				temp += "-" + dateString.substring(4, 6);
+				temp += "-" + dateString.substring(6, 8);
+				temp += "T00:00:00.000";
+				let tempDate = new Date(temp);
+				if (
+					tempDate.getFullYear() == date.getFullYear() &&
+					tempDate.getMonth() == date.getMonth() &&
+					tempDate.getDate() == date.getDate()
+				) {
+					let contentSelector = document.createElement("div");
+					contentSelector.classList.add("holiday");
+					contentSelector.innerHTML = element.dateName;
+					selector.appendChild(contentSelector);
+					if (element.isHoliday == "Y")
+						selector.classList.add("rest");
+				}
+			});
+		} // else if (calendar.holiday.locdate == weeks[i][j])
+		// dateSelector.innerHTML += "\t " + calendar.holiday.dateName;
+	}
+};
+
 export var dates = (calendar) => {
 	var weeks = [[], [], [], [], [], []];
 	var firstDate = new Date(`${calendar.year}-${calendar.month}`);
@@ -6,7 +34,6 @@ export var dates = (calendar) => {
 			calendar.month == 12 ? 1 : calendar.month + 1
 		}`
 	);
-
 	lastDate = new Date(lastDate.getTime() - 1000 * 60 * 60 * 24);
 
 	var monthName = document.getElementById("month-name");
@@ -23,35 +50,6 @@ export var dates = (calendar) => {
 		weekSelector.classList.add("week-contents");
 
 		for (let j = 0; j < 7; j++) {
-			var inputHoliday = (calHoli, selector, date) => {
-				if (calHoli) {
-					if (calHoli.length > 0) {
-						calHoli.forEach((element) => {
-							let dateString = String(element.locdate);
-							let temp = dateString.substring(0, 4);
-							temp += "-" + dateString.substring(4, 6);
-							temp += "-" + dateString.substring(6, 8);
-							temp += "T00:00:00.000";
-							let tempDate = new Date(temp);
-							if (
-								tempDate.getFullYear() == date.getFullYear() &&
-								tempDate.getMonth() == date.getMonth() &&
-								tempDate.getDate() == date.getDate()
-							) {
-								let contentSelector = document.createElement(
-									"div"
-								);
-								contentSelector.classList.add("holiday");
-								contentSelector.innerHTML = element.dateName;
-								selector.appendChild(contentSelector);
-								if (element.isHoliday == "Y")
-									selector.classList.add("rest");
-							}
-						});
-					} // else if (calendar.holiday.locdate == weeks[i][j])
-					// dateSelector.innerHTML += "\t " + calendar.holiday.dateName;
-				}
-			};
 			weeks[i][j] = new Date(
 				firstDate.getTime() +
 					i * (1000 * 60 * 60 * 24 * 7) +

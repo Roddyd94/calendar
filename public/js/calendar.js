@@ -1,12 +1,14 @@
 import { dates } from "/js/dates.js";
-
 var dateData = document.querySelector("#date-data");
-var holiData = JSON.parse(document.querySelector("#holi-data").innerHTML);
+// var holiData = JSON.parse(document.querySelector("#holi-data").innerHTML);
 var dateString = dateData.innerHTML;
 var today = new Date();
 var calendar = {};
 var clickPrev = document.querySelector(".left-arrow");
 var clickNext = document.querySelector(".right-arrow");
+
+var holiData;
+var holiRequest = new Request(`http://roddyd.net/holiday?date=${dateString}`);
 
 if (dateString != "") {
 	calendar.year = Math.floor(Number(dateString) / 10000);
@@ -18,8 +20,14 @@ if (dateString != "") {
 	calendar.today = today.getDate();
 }
 
-calendar.holiday = holiData;
-dates(calendar);
+(async () => {
+	await fetch(holiRequest).then(async (res) => {
+		holiData = await res.json();
+		console.log(holiData);
+		calendar.holiday = holiData;
+		dates(calendar);
+	});
+})();
 
 clickPrev.onclick = () => {
 	location.href = `calendar?date=${
