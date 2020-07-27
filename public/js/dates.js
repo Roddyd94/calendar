@@ -25,35 +25,33 @@ var inputHoliday = (calHoli, selector, date) => {
 	}
 };
 
-// var inputLunaYear = (date, selector) => {
-// 	var lunaDate;
-// 	if (date) {
-// 		(async () => {
-// 			var lunaString = `${date.getFullYear()}${
-// 				date.getMonth() + 1 < 10
-// 					? "0" + (date.getMonth() + 1)
-// 					: date.getMonth() + 1
-// 			}${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}`;
-// 			var lunaRequest = new Request(
-// 				`http://roddyd.net/lunaYear?date=${lunaString}`
-// 			);
-// 			await fetch(lunaRequest).then(async (res) => {
-// 				var tempMonth = Number(res.lunMonth);
-// 				var tempDay = Number(res.lunDay);
-// 				var tempLeap = res.lunLeapmonth;
-// 				var lunaData = await res.json();
-// 				lunaDate = lunaData;
-//
-// 				var lunaSelector = document.createElement("span");
-// 				lunaSelector.classList.add("luna-dates");
-// 				lunaSelector.innerHTML = `${tempMonth}.${tempDay}${
-// 					tempLeap == "Y" ? "(윤)" : ""
-// 				}`;
-// 				selector.appendChild(lunaSelector);
-// 			});
-// 		})();
-// 	}
-// };
+var inputLunaYear = (date, selector) => {
+	if (date) {
+		(async () => {
+			var lunaString = `${date.getFullYear()}${
+				date.getMonth() + 1 < 10
+					? "0" + (date.getMonth() + 1)
+					: date.getMonth() + 1
+			}${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}`;
+			var lunaRequest = new Request(
+				`http://roddyd.net/lunaYear?date=${lunaString}`
+			);
+			await fetch(lunaRequest).then(async (res) => {
+				var lunaData = await res.json();
+				var tempMonth = lunaData.lunMonth;
+				var tempDay = lunaData.lunDay;
+				var tempLeap = lunaData.lunLeapmonth;
+
+				var lunaSelector = document.createElement("span");
+				lunaSelector.classList.add("luna-dates");
+				lunaSelector.innerHTML = `${tempMonth}.${tempDay}${
+					tempLeap == "Y" ? "(윤)" : ""
+				}`;
+				selector.appendChild(lunaSelector);
+			});
+		})();
+	}
+};
 
 export var dates = (calendar) => {
 	var weeks = [];
@@ -101,9 +99,8 @@ export var dates = (calendar) => {
 
 			dateSelector.classList.add("date-cell");
 			dateSelector.innerHTML = `${weeks[i][j].getDate()}일`;
-
-			// inputLunaYear(weeks[i][j], dateSelector);
 			inputHoliday(calendar.holiday, dateSelector, weeks[i][j]);
+			inputLunaYear(weeks[i][j], dateSelector);
 
 			weekSelector.appendChild(dateSelector);
 		}

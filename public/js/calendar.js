@@ -1,5 +1,4 @@
 import { dates } from "/js/dates.js";
-
 var dateData = document.querySelector("#date-data");
 // var holiData = JSON.parse(document.querySelector("#holi-data").innerHTML);
 var dateString = dateData.innerHTML;
@@ -12,9 +11,9 @@ var holiData;
 var holiRequest = new Request(`http://roddyd.net/holiday?date=${dateString}`);
 
 if (dateString != "") {
-	calendar.year = dateString.substring(0, 4);
-	calendar.month = dateString.substring(4, 6);
-	calendar.today = dateString.substring(6, 8);
+	calendar.year = Math.floor(Number(dateString) / 10000);
+	calendar.month = Math.floor((Number(dateString) % 10000) / 100);
+	calendar.today = Math.floor(Number(dateString) % 100);
 } else {
 	calendar.year = today.getFullYear();
 	calendar.month = today.getMonth() + 1;

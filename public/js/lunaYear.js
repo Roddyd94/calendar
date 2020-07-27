@@ -1,11 +1,10 @@
 var request = require("request");
+
 var exports = (module.exports = {});
 exports.reqLunaYear = (date) => {
 	var year = date.substring(0, 4);
 	var month = date.substring(4, 6);
 	var day = date.substring(6, 8);
-
-	var result = [];
 
 	var yearTypes = ["getLunCalInfo", "getSolCalInfo"];
 	var url =
@@ -37,7 +36,7 @@ exports.reqLunaYear = (date) => {
 				console.log("Lunar year API Status", response.statusCode);
 				var lunaDate = JSON.parse(body).response.body.items.item;
 				if (lunaDate) {
-					result.push({
+					var result = {
 						lunYear: lunaDate.lunYear,
 						lunMonth: lunaDate.lunMonth,
 						lunDay: lunaDate.lunDay,
@@ -45,7 +44,7 @@ exports.reqLunaYear = (date) => {
 						solYear: lunaDate.solYear,
 						solMonth: lunaDate.solMonth,
 						solDay: lunaDate.solDay,
-					});
+					};
 				}
 				resolve(result);
 			}
