@@ -21,9 +21,8 @@ app.get("/calendar", (req, res) => {
 	var holiData;
 
 	(async () => {
-		var temp = await holiday.reqHoliday(req.query.date);
+		var temp = await holiday.reqHolidays(req.query.date);
 		holiData = temp;
-		console.log(JSON.stringify(holiData));
 
 		res.render("calendar", {
 			helpers: {

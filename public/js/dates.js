@@ -23,6 +23,35 @@ export var dates = (calendar) => {
 		weekSelector.classList.add("week-contents");
 
 		for (let j = 0; j < 7; j++) {
+			var inputHoliday = (calHoli, selector, date) => {
+				if (calHoli) {
+					if (calHoli.length > 0) {
+						calHoli.forEach((element) => {
+							let dateString = String(element.locdate);
+							let temp = dateString.substring(0, 4);
+							temp += "-" + dateString.substring(4, 6);
+							temp += "-" + dateString.substring(6, 8);
+							temp += "T00:00:00.000";
+							let tempDate = new Date(temp);
+							if (
+								tempDate.getFullYear() == date.getFullYear() &&
+								tempDate.getMonth() == date.getMonth() &&
+								tempDate.getDate() == date.getDate()
+							) {
+								let contentSelector = document.createElement(
+									"div"
+								);
+								contentSelector.classList.add("holiday");
+								contentSelector.innerHTML = element.dateName;
+								selector.appendChild(contentSelector);
+								if (element.isHoliday == "Y")
+									selector.classList.add("rest");
+							}
+						});
+					} // else if (calendar.holiday.locdate == weeks[i][j])
+					// dateSelector.innerHTML += "\t " + calendar.holiday.dateName;
+				}
+			};
 			weeks[i][j] = new Date(
 				firstDate.getTime() +
 					i * (1000 * 60 * 60 * 24 * 7) +
@@ -32,43 +61,21 @@ export var dates = (calendar) => {
 			let dateSelector = document.createElement("td");
 			dateSelector.id = `date-${i + 1}-${j + 1}`;
 
+			if (j == 0) dateSelector.classList.add("sunday");
+			else if (j == 6) dateSelector.classList.add("saturday");
+
 			if (weeks[i][j].getMonth() + 1 == calendar.month) {
 				if (weeks[i][j].getDate() == calendar.today)
 					dateSelector.classList.add("today");
-				if (j == 0) dateSelector.classList.add("sunday");
-				else if (j == 6) dateSelector.classList.add("saturday");
 			} else {
 				dateSelector.classList.add("other-month");
-				if (j == 0) dateSelector.classList.add("other-sunday");
-				else if (j == 6) dateSelector.classList.add("other-saturday");
 			}
 
 			dateSelector.classList.add("date-cell");
-			dateSelector.innerHTML = `${weeks[i][j].getDate()}일\n`;
+			dateSelector.innerHTML = `${weeks[i][j].getDate()}일`;
 
-			if (calendar.holiday) {
-				if (calendar.holiday.length > 0) {
-					calendar.holiday.forEach((element) => {
-						let dateString = String(element.locdate);
-						let temp = dateString.substring(0, 4);
-						temp += "-" + dateString.substring(4, 6);
-						temp += "-" + dateString.substring(6, 8);
-						temp += "T00:00:00.000";
-						let tempDate = new Date(temp);
-						if (tempDate.getTime() == weeks[i][j].getTime()) {
-							let contentSelector = document.createElement(
-								"span"
-							);
-							contentSelector.classList.add("holiday");
-							contentSelector.innerHTML = element.dateName;
-							dateSelector.appendChild(contentSelector);
-							if (element.isHoliday == "Y")
-								dateSelector.classList.add("rest");
-						}
-					});
-				} // else if (calendar.holiday.locdate == weeks[i][j])
-				// dateSelector.innerHTML += "\t " + calendar.holiday.dateName;
-			}
+			inputHoliday(calendar.holiday, dateSelector, weeks[i][j]);
+
 			weekSelector.appendChild(dateSelector);
 		}
 		monthSelector.appendChild(weekSelector);

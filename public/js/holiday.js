@@ -4,6 +4,13 @@ var exports = (module.exports = {});
 exports.reqHoliday = (date) => {
 	year = Math.floor(date / 10000);
 	month = Math.floor((date % 10000) / 100);
+
+	if (!date) {
+		let today = new Date();
+		year = today.getFullYear();
+		month = today.getMonth() + 1;
+	}
+
 	var specDayTypes = [
 		"getRestDeInfo",
 		"getHoliDeInfo",
@@ -82,4 +89,43 @@ exports.reqHoliday = (date) => {
 			);
 		});
 	}
+};
+
+exports.reqHolidays = (date) => {
+	return new Promise((resolve, reject) => {
+		if (!date) {
+			let today = new Date();
+			year = today.getFullYear();
+			month = today.getMonth() + 1;
+			date = today.getDate();
+			date = `${year}${month < 10 ? "0" + month : month}${
+				date < 10 ? "0" + date : date
+			}`;
+		}
+		var preDate =
+			date.substring(4, 6) == "01"
+				? `${Number(date.substring(0, 4)) - 1}1201`
+				: `${date.substring(0, 4)}${
+						Number(date.substring(4, 6)) - 1 < 10
+							? "0" + (Number(date.substring(4, 6)) - 1)
+							: Number(date.substring(4, 6)) - 1
+				  }01`;
+		var postDate =
+			date.substring(4, 6) == "12"
+				? `${Number(date.substring(0, 4)) + 1}0101`
+				: `${date.substring(0, 4)}${
+						Number(date.substring(4, 6)) + 1 < 10
+							? "0" + (Number(date.substring(4, 6)) + 1)
+							: Number(date.substring(4, 6)) + 1
+				  }01`;
+		(async () => {
+			var temp = await exports.reqHoliday(preDate);
+			var result = temp;
+			temp = await exports.reqHoliday(date);
+			result = result.concat(temp);
+			temp = await exports.reqHoliday(postDate);
+			result = result.concat(temp);
+			resolve(result);
+		})();
+	});
 };
