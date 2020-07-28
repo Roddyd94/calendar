@@ -64,7 +64,7 @@ exports.reqHoliday = (date) => {
 						);
 					}
 					console.log("Holiday API Status", response.statusCode);
-					var ays = JSON.parse(body).response.body.items.item;
+					var days = JSON.parse(body).response.body.items.item;
 					if (days) {
 						if (days.length > 1) {
 							days.forEach((element) => {

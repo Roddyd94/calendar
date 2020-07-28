@@ -66,10 +66,7 @@ app.get("/lunaYear", (req, res) => {
 	var month = req.query.date
 		? req.query.date.substring(4, 6)
 		: `${today.getMonth() + 1}`;
-	var day = req.query.date
-		? req.query.date.substring(6, 8)
-		: `${today.getDate()}`;
-	var path = `./public/json/luna_${year}-${month}-${day}.json`;
+	var path = `./public/json/luna_${year}-${month}.json`;
 	var lunaData;
 	if (fs.existsSync(path)) {
 		fs.readFile(path, "utf-8", (err, data) => {

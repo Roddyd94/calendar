@@ -7,6 +7,8 @@ var calendar = {};
 var clickPrev = document.querySelector(".left-arrow");
 var clickNext = document.querySelector(".right-arrow");
 
+var cells = document.querySelector(".date-cell");
+
 var holiData;
 var holiRequest = new Request(`http://roddyd.net/holiday?date=${dateString}`);
 
@@ -54,3 +56,17 @@ ${
 }
 01`;
 };
+
+// cells.onclick = () => {
+// 	location.href = `calendar?date=${
+// 		calendar.month == 12 ? calendar.year + 1 : calendar.year
+// 	}
+// ${
+// 	calendar.month == 12
+// 		? "01"
+// 		: calendar.month + 1 > 9
+// 		? calendar.month + 1
+// 		: "0" + (calendar.month + 1)
+// }
+// 01`;
+// };

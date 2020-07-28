@@ -6,15 +6,6 @@ table {
 	color: #f1f1f1aa;
 }
 
-tbody {
-	overflow-y: scroll;
-	scrollbar-width: none;
-	-ms-overflow-style: none;
-}
-tbody::-webkit-scrollbar {
-	display: none;
-}
-
 tr {
 	width: 100%;
 	display: flex;
@@ -34,11 +25,16 @@ th {
 }
 
 td {
-	padding: 2px;
+	padding: 0.5em;
 	width: 100%;
 	height: 8vw;
 	border: solid 1px;
 	box-sizing: border-box;
+}
+
+.luna-dates {
+	float: right;
+	letter-spacing: -0.1em;
 }
 
 .date-cell {
@@ -84,6 +80,15 @@ td {
 .other-month.sunday {
 	color: #a02424cc;
 	border: solid 1px #e4e4e423;
+}
+
+#calendar-space {
+	overflow-y: scroll;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+#calendar-space::-webkit-scrollbar {
+	display: none;
 }
 
 #month-name {

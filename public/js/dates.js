@@ -1,3 +1,48 @@
+var inputLunaYear = async (date, selector) => {
+	var lunaString = `${date.getFullYear()}${
+		date.getMonth() + 1 < 10
+			? "0" + (date.getMonth() + 1)
+			: date.getMonth() + 1
+	}${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}`;
+	if (lunaDate) {
+		if (lunaDate[0].solMonth != lunaString.substring(4, 6)) {
+		} else {
+			dateNum = date.getDate() - 1;
+			tempMonth = Number(lunaDate[dateNum].lunMonth);
+			tempDay = Number(lunaDate[dateNum].lunDay);
+			tempLeap = lunaDate[dateNum].lunLeapmonth;
+
+			let lunaSelector = document.createElement("span");
+			lunaSelector.classList.add("luna-dates");
+			lunaSelector.innerHTML = `${tempMonth}.${tempDay}${
+				tempLeap == "Y" ? "(윤)" : ""
+			}`;
+			selector.appendChild(lunaSelector);
+		}
+	} else {
+		await (async () => {
+			var lunaRequest = new Request(
+				`http://roddyd.net/lunaYear?date=${lunaString}`
+			);
+			await fetch(lunaRequest).then(async (res) => {
+				var lunaData = await res.json();
+				lunaDate = lunaData;
+				dateNum = date.getDate() - 1;
+				tempMonth = Number(lunaDate[dateNum].lunMonth);
+				tempDay = Number(lunaDate[dateNum].lunDay);
+				tempLeap = lunaDate[dateNum].lunLeapmonth;
+
+				let lunaSelector = document.createElement("span");
+				lunaSelector.classList.add("luna-dates");
+				lunaSelector.innerHTML = `${
+					tempLeap == "윤" ? "(윤)" : ""
+				}${tempMonth}.${tempDay}`;
+				selector.appendChild(lunaSelector);
+			});
+		})();
+	}
+};
+
 var inputHoliday = (calHoli, selector, date) => {
 	if (calHoli) {
 		if (calHoli.length > 0) {
@@ -25,33 +70,11 @@ var inputHoliday = (calHoli, selector, date) => {
 	}
 };
 
-var inputLunaYear = (date, selector) => {
-	if (date) {
-		(async () => {
-			var lunaString = `${date.getFullYear()}${
-				date.getMonth() + 1 < 10
-					? "0" + (date.getMonth() + 1)
-					: date.getMonth() + 1
-			}${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}`;
-			var lunaRequest = new Request(
-				`http://roddyd.net/lunaYear?date=${lunaString}`
-			);
-			await fetch(lunaRequest).then(async (res) => {
-				var lunaData = await res.json();
-				var tempMonth = lunaData.lunMonth;
-				var tempDay = lunaData.lunDay;
-				var tempLeap = lunaData.lunLeapmonth;
-
-				var lunaSelector = document.createElement("span");
-				lunaSelector.classList.add("luna-dates");
-				lunaSelector.innerHTML = `${tempMonth}.${tempDay}${
-					tempLeap == "Y" ? "(윤)" : ""
-				}`;
-				selector.appendChild(lunaSelector);
-			});
-		})();
-	}
-};
+var lunaDate;
+var tempMonth;
+var tempDay;
+var tempLeap;
+var dateNum;
 
 export var dates = (calendar) => {
 	var weeks = [];
@@ -99,8 +122,11 @@ export var dates = (calendar) => {
 
 			dateSelector.classList.add("date-cell");
 			dateSelector.innerHTML = `${weeks[i][j].getDate()}일`;
-			inputHoliday(calendar.holiday, dateSelector, weeks[i][j]);
-			inputLunaYear(weeks[i][j], dateSelector);
+
+			(async () => {
+				await inputLunaYear(weeks[i][j], dateSelector);
+				inputHoliday(calendar.holiday, dateSelector, weeks[i][j]);
+			})();
 
 			weekSelector.appendChild(dateSelector);
 		}
