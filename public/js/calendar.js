@@ -10,7 +10,7 @@ var clickNext = document.querySelector(".right-arrow");
 var cells = document.querySelector(".date-cell");
 
 var holiData;
-var holiRequest = new Request(`http://roddyd.net/holiday?date=${dateString}`);
+var holiRequest = new Request(`https://roddyd.net/holiday?date=${dateString}`);
 
 if (dateString != "") {
 	calendar.year = Math.floor(Number(dateString) / 10000);

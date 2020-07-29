@@ -22,7 +22,7 @@ var inputLunaYear = async (date, selector) => {
 	} else {
 		await (async () => {
 			var lunaRequest = new Request(
-				`http://roddyd.net/lunaYear?date=${lunaString}`
+				`https://roddyd.net/lunaYear?date=${lunaString}`
 			);
 			await fetch(lunaRequest).then(async (res) => {
 				var lunaData = await res.json();

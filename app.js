@@ -1,4 +1,5 @@
 var express = require("express");
+var https = require("https");
 var fs = require("fs");
 var handlebars = require("express-handlebars").create({
 	defaultLayout: "main",
@@ -8,10 +9,16 @@ var handlebars = require("express-handlebars").create({
 var holiday = require("./public/js/holiday");
 var lunaYear = require("./public/js/lunaYear");
 
+var options = {
+	key: fs.readFileSync(__dirname + "/ssl/private.key"),
+	cert: fs.readFileSync(__dirname + "/ssl/certificate.crt"),
+	ca: fs.readFileSync(__dirname + "/ssl/ca_bundle.crt"),
+};
+
 var app = express();
 
 app.use(express.static(__dirname + "/public"));
-app.set("port", process.env.PORT || 12345);
+app.set("port", process.env.PORT || 443);
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 
@@ -101,9 +108,9 @@ app.use((err, req, res, next) => {
 	res.render("500");
 });
 
-app.listen(app.get("port"), () => {
+https.createServer(options, app).listen(app.get("port"), () => {
 	console.log(
-		"Express started on http://localhost:" +
+		"Express started on https://localhost:" +
 			app.get("port") +
 			"; press Ctrl-C to terminate"
 	);
