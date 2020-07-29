@@ -4,9 +4,12 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "googleapis": "^39.2.0",
+    "mysql": "^2.18.1",
     "ntp-client": "^0.5.3",
     "request": "^2.88.2"
   },

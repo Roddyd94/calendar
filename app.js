@@ -1,19 +1,25 @@
 var express = require("express");
 var https = require("https");
 var fs = require("fs");
+var cookieParser = require("cookie-parser");
 var handlebars = require("express-handlebars").create({
 	defaultLayout: "main",
 	partialsDir: "views/partials",
 });
 
-var holiday = require("./public/js/holiday");
-var lunaYear = require("./public/js/lunaYear");
+var holiday = require(__dirname + "/public/js/holiday");
+var lunaYear = require(__dirname + "/public/js/luna-year");
+var gCalendar = require(__dirname + "/public/js/g-calendar");
+var sqlUser = require(__dirname + "/public/js/sql-user");
 
 var options = {
 	key: fs.readFileSync(__dirname + "/ssl/private.key"),
 	cert: fs.readFileSync(__dirname + "/ssl/certificate.crt"),
 	ca: fs.readFileSync(__dirname + "/ssl/ca_bundle.crt"),
 };
+
+const TOKEN_DIR = __dirname + "/api/token/";
+const CRED_PATH = __dirname + "/api/client_secret.json";
 
 var app = express();
 
@@ -95,6 +101,30 @@ app.get("/lunaYear", (req, res) => {
 			});
 		})();
 	}
+});
+
+app.get("/redirect", (req, res) => {
+	var oAuth2Client;
+	oAuth2Client = gCalendar.authorize(id);
+	gCalendar.getAuthUrl(oAuth2Client);
+
+	if (req.query.code) gCalendar.getAccessToken(oAuth2Client, req.query.code);
+	res.redirect("/home");
+});
+
+app.get("/profile", (req, res) => {
+	var oAuth2Client;
+	var id = null;
+	var email = req.query.email;
+	(async () => {
+		id = await sqlUser.existsId(email);
+		if (!id) {
+			await sqlUser.addId(id, email);
+		}
+		oAuth2Client = await gCalendar.service(id, null, CRED_PATH, TOKEN_DIR);
+		var url = await gCalendar.getAuthUrl(oAuth2Client);
+		res.send(url);
+	})();
 });
 
 app.use((req, res, next) => {

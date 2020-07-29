@@ -40,6 +40,9 @@ body {
 	float: left;
 	border-right: 1px solid #e4e4e423;
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .section {
@@ -64,4 +67,8 @@ body {
 	width: fit-content;
 	height: fit-content;
 	transform: scaleX(-1);
+}
+
+.g-signin2 {
+	bottom: 10px;
 }
