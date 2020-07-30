@@ -1,4 +1,7 @@
 <link rel="stylesheet" href="css/clock.css">
+<div id="date-data" style="display: none;">{{dateData}}</div>
+<div id="holi-data" style="display: none;">{{holiDatas}}</div>
+<div id="id-data" style="display: none;">{{idData}}</div>
 <div id="clock-click">
     <div id="clock-task-box">
         <h2 id="clock-task"> </h2>
@@ -6,4 +9,8 @@
     </div>
     <h1 id="clock-countdown"></h1>
 </div>
+
+<div class="g-signin2" data-onsuccess="onSignIn" style="display: none;"></div>
+<a href="#" onclick="signOut();" style="display: none;">Sign out</a>
+<script src="js/g-login.js"></script>
 <script src="js/clock.js"></script>

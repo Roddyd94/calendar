@@ -1,6 +1,5 @@
 import { dates } from "/js/dates.js";
 var dateData = document.querySelector("#date-data");
-// var holiData = JSON.parse(document.querySelector("#holi-data").innerHTML);
 var dateString = dateData.innerHTML;
 var today = new Date();
 var calendar = {};

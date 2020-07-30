@@ -38,7 +38,12 @@ bower_components
 build/Release
 
 # Dependency directories
+node_modules/
 jspm_packages/
+
+# SSL key directory
+ssl/
+api/
 
 # TypeScript v1 declaration files
 typings/

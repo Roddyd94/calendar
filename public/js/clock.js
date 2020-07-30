@@ -2,20 +2,14 @@ var today = document.querySelector("#clock-today");
 var clock = document.querySelector("#clock-countdown");
 var task = document.querySelector("#clock-task");
 var click = document.querySelector("#clock-click");
+var taskTime = new Date();
 
-var taskYear = 2020;
-var taskMonth = 12;
-var taskDate = 3;
-var taskHours = 9;
-var taskMinutes = 0;
+var summary = "일정 이름";
+var id = document.getElementById("id-data").innerHTML;
 
-var taskTime = new Date(
-	`${taskYear}-${taskMonth}-${taskDate} ${taskHours}:${taskMinutes}`
-);
-
-var getTime = (clockSwitch = 1) => {
+var getClock = async (clockSwitch = 1) => {
 	const time = new Date();
-
+	taskTime = new Date(document.getElementById("date-data").innerHTML);
 	if (clockSwitch) {
 		let timeLeft = 0;
 		timeLeft = taskTime.getTime() - time.getTime();
@@ -29,14 +23,14 @@ var getTime = (clockSwitch = 1) => {
 		);
 		let secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-		task.innerHTML = `[수능] 까지`;
+		task.innerHTML = summary;
 		today.innerHTML = `${daysLeft}일`;
 		clock.innerHTML = `${hoursLeft}:${
 			minutesLeft / 10 >= 1 ? minutesLeft : "0" + minutesLeft
 		}:${secondsLeft / 10 >= 1 ? secondsLeft : "0" + secondsLeft}`;
 	} else {
 		let year = time.getFullYear();
-		let month = time.getMonth();
+		let month = time.getMonth() + 1;
 		let date = time.getDate();
 		let hour = time.getHours();
 		let minute = time.getMinutes();
@@ -51,10 +45,27 @@ var getTime = (clockSwitch = 1) => {
 	}
 };
 
+var gCalRequest = new Request(
+	`https://roddyd.net/gCalendar?id=${id}&length=${1}&info=${1}`
+);
+fetch(gCalRequest).then(async (res) => {
+	var events = await res.json();
+	document.getElementById("date-data").innerHTML =
+		events[0].start.dateTime || events[0].start.date;
+	summary = `[${events[0].summary}]까지`;
+	// let lunaSelector = document.createElement("span");
+	// lunaSelector.classList.add("luna-dates");
+	// lunaSelector.innerHTML = `${
+	// 	tempLeap == "윤" ? "(윤)" : ""
+	// }${tempMonth}.${tempDay}`;
+	// selector.appendChild(lunaSelector);
+});
+if (id == "") {
+	setInterval(getClock, 1000, 0);
+} else {
+	setInterval(getClock, 1000, 1);
+}
+
 click.onclick = () => {
-	location.href = "calendar";
+	location.href = "schedule";
 };
-
-getTime();
-
-setInterval(getTime, 1000);

@@ -52,8 +52,8 @@ body {
 }
 
 .icon {
-	width: 9vh;
-	height: 100%;
+	width: 6vh;
+	height: 6vh;
 }
 
 .left-arrow {
@@ -64,8 +64,8 @@ body {
 
 .right-arrow {
 	border: solid 0px;
-	width: fit-content;
-	height: fit-content;
+	width: 10vh;
+	height: 10vh;
 	transform: scaleX(-1);
 }
 

@@ -2,6 +2,7 @@ var express = require("express");
 var https = require("https");
 var fs = require("fs");
 var cookieParser = require("cookie-parser");
+const { connect } = require("http2");
 var handlebars = require("express-handlebars").create({
 	defaultLayout: "main",
 	partialsDir: "views/partials",
@@ -24,12 +25,15 @@ const CRED_PATH = __dirname + "/api/client_secret.json";
 var app = express();
 
 app.use(express.static(__dirname + "/public"));
+app.use(cookieParser());
 app.set("port", process.env.PORT || 443);
 app.engine("handlebars", handlebars.engine);
 app.set("view engine", "handlebars");
 
-app.get("/", (req, res) => {
-	res.render("home");
+app.get("/", async (req, res) => {
+	res.render("home", {
+		helpers: { dateData: req.query.date, idData: req.cookies.id },
+	});
 });
 
 app.get("/calendar", (req, res) => {
@@ -42,6 +46,12 @@ app.get("/calendar", (req, res) => {
 
 app.get("/task", (req, res) => {
 	res.render("task", { helpers: { dateData: req.query.date } });
+});
+
+app.get("/schedule", (req, res) => {
+	res.render("schedule", {
+		helpers: { dateData: req.query.date, idData: req.cookies.id },
+	});
 });
 
 app.get("/holiday", (req, res) => {
@@ -103,28 +113,60 @@ app.get("/lunaYear", (req, res) => {
 	}
 });
 
-app.get("/redirect", (req, res) => {
+app.get("/redirect", async (req, res) => {
 	var oAuth2Client;
-	oAuth2Client = gCalendar.authorize(id);
-	gCalendar.getAuthUrl(oAuth2Client);
-
-	if (req.query.code) gCalendar.getAccessToken(oAuth2Client, req.query.code);
-	res.redirect("/home");
+	oAuth2Client = await gCalendar.service(
+		req.cookies.id,
+		CRED_PATH,
+		TOKEN_DIR
+	);
+	if (req.query.code) {
+		await gCalendar.getAccessToken(
+			oAuth2Client,
+			req.cookies.id,
+			req.query.code,
+			TOKEN_DIR
+		);
+		res.redirect("/");
+	}
 });
 
-app.get("/profile", (req, res) => {
+app.get("/profile", async (req, res) => {
 	var oAuth2Client;
 	var id = null;
 	var email = req.query.email;
-	(async () => {
-		id = await sqlUser.existsId(email);
-		if (!id) {
-			await sqlUser.addId(id, email);
-		}
-		oAuth2Client = await gCalendar.service(id, null, CRED_PATH, TOKEN_DIR);
-		var url = await gCalendar.getAuthUrl(oAuth2Client);
-		res.send(url);
-	})();
+	id = await sqlUser.existsId(email);
+	if (!id) {
+		id = await sqlUser.addId(id, email);
+	}
+	res.cookie("id", id, {
+		httpOnly: true,
+		secure: true,
+	});
+	oAuth2Client = await gCalendar.service(id, CRED_PATH, TOKEN_DIR);
+	var url;
+	TOKEN_PATH = TOKEN_DIR + `${id}.json`;
+	if (!fs.existsSync(TOKEN_PATH))
+		url = await gCalendar.getAuthUrl(oAuth2Client);
+	if (req.query.info == 1) res.send(url);
+	else if (req.query.info == 2) res.send(id);
+});
+
+app.get("/gCalendar", async (req, res) => {
+	var date = new Date();
+	var oAuth2Client;
+	oAuth2Client = await gCalendar.service(req.query.id, CRED_PATH, TOKEN_DIR);
+	var events = await gCalendar.listEvents(
+		oAuth2Client,
+		req.query.length,
+		date
+	);
+	if (req.query.info == 1) {
+		res.json(events);
+	} else if (req.query.info == 2) {
+		let timeData = events[0].start.dateTime || events[0].start.date;
+		res.json(timeData);
+	}
 });
 
 app.use((req, res, next) => {

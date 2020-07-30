@@ -33,8 +33,6 @@ exports.existsId = (email) => {
 };
 
 exports.addId = (id, email) => {
-	if (id) return;
-
 	id = crypto.randomBytes(20).toString("hex");
 	return new Promise((resolve, reject) => {
 		sqlConnection.query(
@@ -42,7 +40,6 @@ exports.addId = (id, email) => {
 			(error, result, fields) => {
 				if (error) reject(error);
 				else {
-					id = result.id;
 					console.log(`The new ID of ${email} added: ${id}`);
 					resolve(id);
 				}
