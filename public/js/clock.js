@@ -24,10 +24,20 @@ var getClock = async (clockSwitch = 1) => {
 		let secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
 		task.innerHTML = summary;
-		today.innerHTML = `${daysLeft}일`;
-		clock.innerHTML = `${hoursLeft}:${
-			minutesLeft / 10 >= 1 ? minutesLeft : "0" + minutesLeft
-		}:${secondsLeft / 10 >= 1 ? secondsLeft : "0" + secondsLeft}`;
+		today.innerHTML = `${daysLeft < 0 ? "0" : daysLeft}일`;
+		clock.innerHTML = `${hoursLeft < 0 ? "0" : hoursLeft}:${
+			minutesLeft < 0
+				? "00"
+				: minutesLeft / 10 >= 1
+				? minutesLeft
+				: "0" + minutesLeft
+		}:${
+			secondsLeft < 0
+				? "00"
+				: secondsLeft / 10 >= 1
+				? secondsLeft
+				: "0" + secondsLeft
+		}`;
 	} else {
 		let year = time.getFullYear();
 		let month = time.getMonth() + 1;
