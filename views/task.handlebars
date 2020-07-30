@@ -1,0 +1,66 @@
+{{>menubar}}
+<link rel="stylesheet" href="css/task.css">
+<section class="section task_style">
+    <form action="" method="get">
+        <span class="task-item" id="task-title">
+            <label for="task-name">제&nbsp &nbsp목</label>
+            <input type="text" class="task-content" id="task-name" name="task-name">
+            <input type="button" id="save-task" name="save-task" value="저 장">
+        </span>
+        <ul id="task-items">
+            <li class="task-item">
+                <label for="task-start">시작 시간</label>
+                <input type="time" class="task-content" id="task-start" name="task-start">
+            </li>
+            <li class="task-item">
+                <label for="task-end">종료 시간</label>
+                <input type="time" class="task-content" id="task-end" name="task-end">
+            </li>
+            <li class="task-item">
+                <label for="task-location">장&nbsp &nbsp &nbsp소</label>
+                <input type="text" class="task-content" id="place" name="place">
+            </li>
+            <li class="task-item">
+                <label for="task-alarm">알람 시작</label>
+                <select class="task-content" id="task-alarm" name="task-alarm">
+                    <option value="3">&nbsp3분 전</option>
+                    <option value="5">&nbsp5분 전</option>
+                    <option value="10">10분 전</option>
+                    <option value="15">15분 전</option>
+                    <option value="20">20분 전</option>
+                </select>
+            </li>
+            <li class="task-item">
+                <label for="task-weekday">반&nbsp &nbsp &nbsp복</label>
+                <span id="task-weekday">
+                    <label for="select-sun" class="task-repeat-label">일</label>
+                    <input type="checkbox" class="task-repeat" id="select-sun">
+                    <label for="select-mon" class="task-repeat-label">월</label>
+                    <input type="checkbox" class="task-repeat" id="select-mon">
+                    <label for="select-tue" class="task-repeat-label">화</label>
+                    <input type="checkbox" class="task-repeat" id="select-tue">
+                    <label for="select-wed" class="task-repeat-label">수</label>
+                    <input type="checkbox" class="task-repeat" id="select-wed">
+                    <label for="select-thu" class="task-repeat-label">목</label>
+                    <input type="checkbox" class="task-repeat" id="select-thu">
+                    <label for="select-fri" class="task-repeat-label">금</label>
+                    <input type="checkbox" class="task-repeat" id="select-fri">
+                    <label for="select-sat" class="task-repeat-label">토</label>
+                    <input type="checkbox" class="task-repeat" id="select-sat">
+                </span>
+            </li>
+            <li class="task-item">
+                <label for="task-rest">휴일 제외</label>
+                <span id="task-weekday">
+                    <label for="select-rest" class="task-rest-label">공휴일 제외</label>
+                    <input type="checkbox" class="task-rest" id="select-rest">
+                </span>
+            </li>
+            <li class="task-item">
+                <label for="task-description">메&nbsp &nbsp &nbsp모</label>
+                <textarea id="task-description"></textarea>
+            </li>
+        </ul>
+    </form>
+    <script src="js/task.js"></script>
+</section>

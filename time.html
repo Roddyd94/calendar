@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://kit.fontawesome.com/faec353acd.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>schedule</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300:400;600&display=swap");
+@import "reset.css";
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 15px;
+    border:1px solid #4c3f3f
+}
+      .box{
+        background-color: white;;
+        width: 300px;
+        height:100px;
+        border-right: 1px solid #4c3f3f;
+      }
+      .box__status{
+        font-size: 90px;
+        padding-left:40px;
+      }
+      .status-bar__status{
+       font-size:90px;
+       padding-right: 1100px;
+      }
+      .nav{
+        width: 580px;
+        padding: 20px;
+        margin-bottom: 20px;
+        float: left;
+        border: 1px solid #bcbcbc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="status-bar">
+      <div class="box">
+        <span class="box__status">날짜 </span>
+      </div>
+      <div class="status-bar__column">
+        <span class="status-bar__status">달력모드 </span>
+        <span class="hearde__icon" size="9x">
+          <i class="fas fa-arrows-alt-h"></i>
+        </span>
+        <span class="header__icon">
+          <i class="fas fa-cog"></i>
+        </span>
+      </div>
+    </div>
+    <nav>
+      <ul></ul>
+    </nav>
+  </body>
+</html>

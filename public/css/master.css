@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  font-family: 'Share Tech Mono', 'Nanum Gothic Coding';
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: #222222;
+  color: #f1f1f1aa;
+  word-break: keep-all;
+}
+
+#slide_body {
+  transition: transform 500ms;
+  width: 100%;
+  height: 100%;
+}
+
+.body_left_to_right {
+  transform: translateX(100%);
+}
+
+.body_right_to_left {
+  transform: translateX(-100%);
+}
+
+.body_bottom_to_up {
+  animation: bottom_to_up 1.5s forwards;
+}
+
+@keyframes bottom_to_up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #e4e4e423;
+  box-sizing: border-box;
+}
+
+.nav {
+  width: 20%;
+  height: 85%;
+  float: left;
+  border-right: 1px solid #e4e4e423;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.section {
+  width: 80%;
+  height: 85%;
+  float: left;
+}
+
+.icon {
+  width: 6vh;
+  height: 6vh;
+}
+
+.left-arrow {
+  border: solid 0px;
+  width: fit-content;
+  height: fit-content;
+  transition: 1s;
+  transform: scaleX(1);
+}
+
+.right-arrow {
+  border: solid 0px;
+  width: fit-content;
+  height: fit-content;
+  transform: scaleX(-1);
+  transition: 1s;
+}
+
+.g-signin2 {
+  bottom: 10px;
+}
+
+.left-arrow:hover {
+  background-color: black;
+  opacity: 0.6;
+  border-radius: 70%;
+  transform: scale(1);
+}
+
+.right-arrow:hover {
+  background-color: black;
+  opacity: 0.6;
+  border-radius: 70%;
+  transform: scaleX(-1);
+}
+
+#sign-out-button {
+  color: #f1f1f1aa;
+  background-color: #e4e4e423;
+  padding: 8px 25px;
+  margin: 15px 0px;
+}
+
+#nav-box {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.button_icon:hover {
+  border-radius: 25px;
+  animation: button_icon_background 2s;
+}
+
+@keyframes button_icon_background {
+  from {
+    background-color: none;
+  }
+  to {
+    background-color: #dddddd;
+    box-shadow: 22px 27px 35px 1px rgba(0, 0, 0, 0.75);
+  }
+}

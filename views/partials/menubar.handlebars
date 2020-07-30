@@ -1,0 +1,23 @@
+<header class="header">
+    <span class="left-arrow icon_column">
+        <img class="icon" src="img/arrow.png" />
+    </span>
+    <span id="month-name"></span>
+    <span class="right-arrow icon_column">
+        <img class="icon" src="img/arrow.png" />
+    </span>
+</header>
+<nav class="nav">
+    <div id="date-data" style="display: none;">{{dateData}}</div>
+    <div id="holi-data" style="display: none;">{{holiDatas}}</div>
+    <div id="id-data" style="display: none;">{{idData}}</div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <a href="#" id="sign-out-button" onclick="signOut();">Sign out</a>
+    <div style="margin-bottom: 30px;">
+        <img class="icon button_icon" id="task-button" src="img/task.png">
+        <img class="icon button_icon" id="schedule-button" src="img/schedule.png">
+        <img class="icon button_icon" id="calendar-button" src="img/calendar.png">
+        <img class="icon button_icon" id="clock-button" src="img/clock.png">
+    </div>
+    <script src="js/g-login.js"></script>
+</nav>

@@ -1,0 +1,49 @@
+#clock-click {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#clock-task-box {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+}
+
+#clock-today {
+	position: relative;
+	left: 0.3em;
+	top: 0.3em;
+	letter-spacing: -0.12em;
+	font-size: 12vh;
+	font-weight: 100;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+#clock-task {
+	position: relative;
+	left: -0.25em;
+	top: 0.3em;
+	letter-spacing: -0.12em;
+	font-size: 10vh;
+	font-weight: 100;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+#clock-countdown {
+	letter-spacing: -0.12em;
+	font-size: 36vh;
+	font-weight: 100;
+	font-family: "Share Tech Mono", "맑은 고딕";
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
