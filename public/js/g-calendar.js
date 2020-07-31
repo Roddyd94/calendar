@@ -88,30 +88,40 @@ exports.getAccessToken = (oAuth2Client, id, code, TOKEN_DIR) => {
  * Lists the next 10 events on the user's primary calendar.
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-exports.listEvents = (auth, length = 10, date) => {
+exports.listEvents = (auth, length = 10, startDate, endDate) => {
 	const calendar = google.calendar({ version: "v3", auth });
 	return new Promise((resolve, reject) => {
-		calendar.events.list(
-			{
+		var resList;
+		if (endDate) {
+			resList = {
 				calendarId: "primary",
-				timeMin: new Date().toISOString(),
+				timeMin: startDate,
+				timeMax: endDate,
 				maxResults: length,
 				singleEvents: true,
 				orderBy: "startTime",
-			},
-			(err, res) => {
-				if (err)
-					return console.log("The API returned an error: " + err);
-				const events = res.data.items;
-				if (events.length) {
-					events.map((event, i) => {
-						const start = event.start.dateTime || event.start.date;
-						resolve(events);
-					});
-				} else {
-					console.log("No upcoming events found.");
-				}
+			};
+		} else {
+			resList = {
+				calendarId: "primary",
+				timeMin: startDate,
+				maxResults: length,
+				singleEvents: true,
+				orderBy: "startTime",
+			};
+		}
+		calendar.events.list(resList, (err, res) => {
+			if (err) {
+				resolve(null);
+				return console.log("The API returned an error: " + err);
 			}
-		);
+			const events = res.data.items;
+			if (events.length) {
+				resolve(events);
+			} else {
+				console.log("No upcoming events found.");
+				resolve(null);
+			}
+		});
 	});
 };

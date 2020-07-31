@@ -40,6 +40,7 @@ app.get("/calendar", (req, res) => {
 	res.render("calendar", {
 		helpers: {
 			dateData: req.query.date,
+			idData: req.cookies.id,
 		},
 	});
 });
@@ -135,37 +136,56 @@ app.get("/profile", async (req, res) => {
 	var oAuth2Client;
 	var id = null;
 	var email = req.query.email;
-	id = await sqlUser.existsId(email);
-	if (!id) {
+	if (email) id = await sqlUser.existsId(email);
+	if (!id && email) {
 		id = await sqlUser.addId(id, email);
 	}
 	res.cookie("id", id, {
 		httpOnly: true,
 		secure: true,
 	});
-	oAuth2Client = await gCalendar.service(id, CRED_PATH, TOKEN_DIR);
+	if (id) {
+		oAuth2Client = await gCalendar.service(id, CRED_PATH, TOKEN_DIR);
+		TOKEN_PATH = TOKEN_DIR + `${id}.json`;
+		if (!fs.existsSync(TOKEN_PATH))
+			url = await gCalendar.getAuthUrl(oAuth2Client);
+	}
 	var url;
-	TOKEN_PATH = TOKEN_DIR + `${id}.json`;
-	if (!fs.existsSync(TOKEN_PATH))
-		url = await gCalendar.getAuthUrl(oAuth2Client);
+
 	if (req.query.info == 1) res.send(url);
 	else if (req.query.info == 2) res.send(id);
+	else if (req.query.info == 4) {
+		res.cookie("id", id, { maxAge: 0 });
+		res.send("log out");
+	}
 });
 
+// length=1, startDate=(new Date()), endDate=null, info=0
 app.get("/gCalendar", async (req, res) => {
-	var date = new Date();
+	var startDate;
+	var endDate;
+	if (req.query.startDate) {
+		startDate = req.query.startDate;
+	}
+	if (req.query.endDate) {
+		endDate = req.query.endDate;
+	}
 	var oAuth2Client;
-	oAuth2Client = await gCalendar.service(req.query.id, CRED_PATH, TOKEN_DIR);
+	oAuth2Client = await gCalendar.service(
+		req.cookies.id,
+		CRED_PATH,
+		TOKEN_DIR
+	);
 	var events = await gCalendar.listEvents(
 		oAuth2Client,
-		req.query.length,
-		date
+		req.query.length || 1,
+		startDate || new Date().toISOString(),
+		endDate
 	);
-	if (req.query.info == 1) {
+	if (req.query.info == null || req.query.info == 0) {
 		res.json(events);
-	} else if (req.query.info == 2) {
-		let timeData = events[0].start.dateTime || events[0].start.date;
-		res.json(timeData);
+	} else if (req.query.info == 1) {
+		res.json(events[0]);
 	}
 });
 

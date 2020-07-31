@@ -23,6 +23,41 @@ body {
 	word-break: keep-all;
 }
 
+.slide_body {
+	opacity: 0;
+	transition: all 500ms;
+	transition-delay: opacity 500ms;
+	width: 100%;
+	height: 100%;
+}
+
+.show {
+	opacity: 1;
+}
+
+.body_left_to_right {
+	transform: translateX(100%);
+}
+
+.body_right_to_left {
+	transform: translateX(-100%);
+}
+
+.body_bottom_to_up {
+	animation: bottom_to_up 1.5s forwards;
+}
+
+@keyframes bottom_to_up {
+	from {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
 .header {
 	width: 100%;
 	height: 15%;
@@ -61,17 +96,41 @@ body {
 	border: solid 0px;
 	width: fit-content;
 	height: fit-content;
+	transition: 1s;
 }
 
 .right-arrow {
 	border: solid 0px;
-	width: 10vh;
-	height: 10vh;
-	transform: scaleX(-1);
+	width: fit-content;
+	height: fit-content;
+	transition: 1s;
 }
 
 .g-signin2 {
 	bottom: 10px;
+}
+
+.left-arrow:hover {
+	background-color: black;
+	opacity: 0.6;
+	border-radius: 70%;
+	transform: scale(1);
+}
+
+.right-arrow:hover {
+	background-color: black;
+	opacity: 0.6;
+	border-radius: 70%;
+	transform: scaleX(1);
+}
+
+#month-name {
+	font-size: 8vh;
+	font-weight: 500;
+	color: #f1f1f1aa;
+	border: solid 0px;
+	width: fit-content;
+	height: fit-content;
 }
 
 #sign-out-button {
@@ -88,4 +147,23 @@ body {
 	flex-direction: column;
 	align-items: center;
 	padding: 20px;
+}
+
+.button_icon {
+	transition: all 300ms;
+}
+
+.button_icon:hover {
+	border-radius: 25px;
+	animation: button_icon_background 2s;
+}
+
+@keyframes button_icon_background {
+	from {
+		background-color: none;
+	}
+	to {
+		background-color: #dddddd;
+		box-shadow: 22px 27px 35px 1px rgba(0, 0, 0, 0.75);
+	}
 }

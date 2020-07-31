@@ -82,6 +82,15 @@ td {
 	border: solid 1px #e4e4e423;
 }
 
+.g-task {
+	font-size: 2.2vh;
+	font-weight: 700;
+	letter-spacing: -0.1em;
+	line-height: 1.5em;
+	text-indent: 1px;
+	color: #fbff00bb;
+}
+
 #calendar-space {
 	overflow-y: scroll;
 	scrollbar-width: none;
@@ -91,11 +100,15 @@ td {
 	display: none;
 }
 
-#month-name {
-	font-size: 8vh;
-	font-weight: 500;
-	color: #f1f1f1aa;
-	border: solid 0px;
-	width: fit-content;
-	height: fit-content;
+.date-cell:hover {
+	border: outset 1px #c9510c;
+}
+
+.calendar_tbody {
+	transition: all 0.5s;
+	transition-delay: 400ms;
+}
+
+.show {
+	opacity: 1;
 }

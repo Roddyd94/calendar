@@ -2,6 +2,7 @@ var today = document.querySelector("#clock-today");
 var clock = document.querySelector("#clock-countdown");
 var task = document.querySelector("#clock-task");
 var click = document.querySelector("#clock-click");
+var clockBody = document.querySelector(".slide_body").classList.add("show");
 var taskTime = new Date();
 
 var summary = "일정 이름";
@@ -56,13 +57,13 @@ var getClock = async (clockSwitch = 1) => {
 };
 
 var gCalRequest = new Request(
-	`https://roddyd.net/gCalendar?id=${id}&length=${1}&info=${1}`
+	`https://roddyd.net/gCalendar?length=${1}&info=${1}`
 );
 fetch(gCalRequest).then(async (res) => {
-	var events = await res.json();
+	var event = await res.json();
 	document.getElementById("date-data").innerHTML =
-		events[0].start.dateTime || events[0].start.date;
-	summary = `[${events[0].summary}]까지`;
+		event.start.dateTime || event.start.date;
+	summary = `[${event.summary}]까지`;
 	// let lunaSelector = document.createElement("span");
 	// lunaSelector.classList.add("luna-dates");
 	// lunaSelector.innerHTML = `${
@@ -70,6 +71,7 @@ fetch(gCalRequest).then(async (res) => {
 	// }${tempMonth}.${tempDay}`;
 	// selector.appendChild(lunaSelector);
 });
+
 if (id == "") {
 	setInterval(getClock, 1000, 0);
 } else {

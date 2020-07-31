@@ -70,6 +70,28 @@ var inputHoliday = (calHoli, selector, date) => {
 	}
 };
 
+var inputTaskData = (calTask, selector, date) => {
+	if (calTask) {
+		if (calTask.length > 0) {
+			calTask.forEach((element) => {
+				var tempDate = new Date(
+					element.start.date || element.start.dateTime
+				);
+				if (
+					tempDate.getFullYear() == date.getFullYear() &&
+					tempDate.getMonth() == date.getMonth() &&
+					tempDate.getDate() == date.getDate()
+				) {
+					let contentSelector = document.createElement("div");
+					contentSelector.classList.add("g-task");
+					contentSelector.innerHTML = element.summary;
+					selector.appendChild(contentSelector);
+				}
+			});
+		}
+	}
+};
+
 var lunaDate;
 var tempMonth;
 var tempDay;
@@ -97,7 +119,7 @@ export var dates = (calendar) => {
 	) {
 		weeks.push([]);
 		let weekSelector = document.createElement("tr");
-		weekSelector.id = `week-${i + 1}`;
+		weekSelector.id = `week-${i}`;
 		weekSelector.classList.add("week-contents");
 
 		for (let j = 0; j < 7; j++) {
@@ -108,7 +130,18 @@ export var dates = (calendar) => {
 			);
 
 			let dateSelector = document.createElement("td");
-			dateSelector.id = `date-${i + 1}-${j + 1}`;
+
+			let dateString = `${weeks[i][j].getFullYear()}${
+				weeks[i][j].getMonth() + 1 < 10
+					? "0" + (weeks[i][j].getMonth() + 1)
+					: weeks[i][j].getMonth() + 1
+			}${
+				weeks[i][j].getDate() < 10
+					? "0" + weeks[i][j].getDate()
+					: weeks[i][j].getDate()
+			}`;
+
+			dateSelector.id = `date-${dateString}`;
 
 			if (j == 0) dateSelector.classList.add("sunday");
 			else if (j == 6) dateSelector.classList.add("saturday");
@@ -122,10 +155,23 @@ export var dates = (calendar) => {
 
 			dateSelector.classList.add("date-cell");
 			dateSelector.innerHTML = `${weeks[i][j].getDate()}일`;
-
+			dateSelector.onclick = () => {
+				if (dateSelector.classList.contains("today"))
+					location.href = `schedule?date=${dateSelector.id.substring(
+						5,
+						13
+					)}`;
+				else {
+					location.href = `schedule?date=${dateSelector.id.substring(
+						5,
+						13
+					)}`;
+				}
+			};
 			(async () => {
 				await inputLunaYear(weeks[i][j], dateSelector);
 				inputHoliday(calendar.holiday, dateSelector, weeks[i][j]);
+				inputTaskData(calendar.tasks, dateSelector, weeks[i][j]);
 			})();
 
 			weekSelector.appendChild(dateSelector);

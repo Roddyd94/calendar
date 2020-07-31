@@ -1,0 +1,10 @@
+.g-schedule {
+	font-size: 6vh;
+	font-weight: 700;
+	line-height: 1.2em;
+	color: #fbff00bb;
+	width: 100%;
+	padding: 2vh 0vh 5vh 3vh;
+	border-bottom: 1px solid #e4e4e423;
+	box-sizing: border-box;
+}
