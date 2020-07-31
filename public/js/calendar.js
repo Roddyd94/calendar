@@ -5,7 +5,8 @@ var today = new Date();
 var calendar = {};
 var clickPrev = document.querySelector('.left-arrow');
 var clickNext = document.querySelector('.right-arrow');
-const calendar_Body = document.querySelector('#slide_body');
+const calendar_Body = document.querySelector('.slide_body');
+const calendar_tbody = document.querySelector('.calendar_tbody');
 
 var cells = document.querySelector('.date-cell');
 
@@ -23,11 +24,17 @@ if (dateString != '') {
 }
 
 (async () => {
-  await fetch(holiRequest).then(async (res) => {
-    holiData = await res.json();
-    calendar.holiday = holiData;
-    dates(calendar);
-  });
+  await fetch(holiRequest)
+    .then(async (res) => {
+      holiData = await res.json();
+      calendar.holiday = holiData;
+      dates(calendar);
+    })
+    .then(() => {
+      setTimeout(() => {
+        calendar_Body.classList.add('show');
+      }, 400);
+    });
 })();
 
 clickPrev.onclick = () => {
