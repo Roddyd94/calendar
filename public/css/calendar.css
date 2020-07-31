@@ -103,3 +103,12 @@ td {
 .date-cell:hover {
   border: outset 1px #c9510c;
 }
+
+.calendar_tbody {
+  transition: all 0.5s;
+  transition-delay: 400ms;
+}
+
+.show {
+  opacity: 1;
+}
